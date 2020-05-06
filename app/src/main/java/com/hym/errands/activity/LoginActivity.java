@@ -53,6 +53,7 @@ public class LoginActivity extends BaseActivity {
 
     }
 
+
     @OnClick({R.id.iv_close_login, R.id.et_phone_login, R.id.iv_send_login})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -66,6 +67,7 @@ public class LoginActivity extends BaseActivity {
                 break;
         }
     }
+
 
     private void sendCode() {
         phone = mEtPhoneLogin.getText().toString();
