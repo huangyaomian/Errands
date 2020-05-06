@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hym.errands">
-    <!-- 允许联网 -->
+    <!-- 获取GSM（2g）、WCDMA（联通3g）等网络状态的信息 -->
     <application
         android:name=".app.App"
         android:allowBackup="true"
@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme1">
-        <activity android:name=".activity.LoginActivity"></activity>
+        <activity android:name=".activity.CheckActivity"></activity>
+        <activity android:name=".activity.LoginActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,23 +21,23 @@
         </activity> <!-- 百度定位服務 -->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="tH14G0NKO55DUX2vH10yUaxKvfpBaeQ5"></meta-data> <!-- 百度定位服務 -->
+            android:value="tH14G0NKO55DUX2vH10yUaxKvfpBaeQ5" /> <!-- 百度定位服務 -->
         <provider
             android:name="cn.bmob.v3.util.BmobContentProvider"
-            android:authorities="com.hym.errands"></provider>
+            android:authorities="com.hym.errands" />
 
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
-            android:process=":remote"></service>
-    </application> <!-- 获取GSM（2g）、WCDMA（联通3g）等网络状态的信息 -->
-    <uses-permission android:name="android.permission.INTERNET" /> <!-- 获取wifi网络状态的信息 -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 保持CPU 运转，屏幕和键盘灯有可能是关闭的,用于文件上传和下载 -->
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- 获取sd卡写的权限，用于文件上传和下载 -->
-    <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- 允许读取手机状态 用于创建BmobInstallation -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 这个权限用于进行网络定位 -->
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- 这个权限用于访问GPS定位 -->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
+            android:process=":remote" />
+    </application> <!-- 获取wifi网络状态的信息 -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 保持CPU 运转，屏幕和键盘灯有可能是关闭的,用于文件上传和下载 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 获取sd卡写的权限，用于文件上传和下载 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- 允许读取手机状态 用于创建BmobInstallation -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- 这个权限用于进行网络定位 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 这个权限用于访问GPS定位 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
