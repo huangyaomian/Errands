@@ -2,6 +2,8 @@ package com.hym.errands.app;
 
 import android.app.Application;
 
+import androidx.multidex.MultiDex;
+
 import com.baidu.mapapi.CoordType;
 import com.baidu.mapapi.SDKInitializer;
 import com.xuexiang.xui.XUI;
@@ -11,6 +13,7 @@ import cn.bmob.v3.Bmob;
 public class App extends Application {
 
     private String APP_KEY = "http://doc.bmob.cn/data/android/#androidmanifestxml";
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -23,5 +26,7 @@ public class App extends Application {
         SDKInitializer.initialize(this);
         //設置坐標類型
         SDKInitializer.setCoordType(CoordType.BD09LL);
+
+        MultiDex.install(this);
     }
 }
