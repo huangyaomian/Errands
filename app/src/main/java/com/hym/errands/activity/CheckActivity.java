@@ -1,9 +1,12 @@
 package com.hym.errands.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,6 +18,9 @@ import com.google.android.material.button.MaterialButton;
 import com.hym.errands.BaseActivity;
 import com.hym.errands.R;
 import com.hym.errands.bmob.BBManager;
+import com.hym.errands.java.login;
+import com.xuexiang.xui.utils.WidgetUtils;
+import com.xuexiang.xui.widget.dialog.MiniLoadingDialog;
 import com.xuexiang.xui.widget.edittext.verify.VerifyCodeEditText;
 import com.xuexiang.xui.widget.toast.XToast;
 
@@ -41,8 +47,10 @@ public class CheckActivity extends BaseActivity {
 
     private String phone;
     private int count = 60;
+    private MiniLoadingDialog mMiniLoadingDialog;
 
     private Handler handler = new Handler(){
+        @SuppressLint("HandlerLeak")
         @Override
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
@@ -55,6 +63,14 @@ public class CheckActivity extends BaseActivity {
                 mBtnTime.setText(count + "s");
                 handler.sendEmptyMessageDelayed(count,1000);
             }
+            if (msg.what == 1001){
+                mMiniLoadingDialog.dismiss();
+//                Intent intent = new Intent();
+//                intent.setClass(CheckActivity.this,HomeActivity.class);
+                setResult(RESULT_OK);
+                finish();
+            }
+
         }
     };
 
@@ -65,11 +81,13 @@ public class CheckActivity extends BaseActivity {
         ButterKnife.bind(this);
         initData();
         initEvent();
+        init();
     }
 
     @Override
     public void init() {
-
+        mMiniLoadingDialog = WidgetUtils.getMiniLoadingDialog(this);
+        mMiniLoadingDialog.setDialogSize(200,200);
     }
 
     @Override
@@ -89,7 +107,7 @@ public class CheckActivity extends BaseActivity {
         mEtCodeCheck.setOnInputListener(new VerifyCodeEditText.OnInputListener() {
             @Override
             public void onComplete(String input) {
-
+                checkPhoneCode(input);
             }
 
             @Override
@@ -102,6 +120,32 @@ public class CheckActivity extends BaseActivity {
 
             }
         });
+    }
+
+    private void checkPhoneCode(String code) {
+        mMiniLoadingDialog.show();
+        login login = new login();
+        login.checkPhoneCode(phone, code, new login.loginCallback() {
+            @Override
+            public void done(String id) {
+                putUserId(id);
+            }
+
+            @Override
+            public void error(String errorMsg, int errorCode) {
+                mMiniLoadingDialog.dismiss();
+                XToast.warning(CheckActivity.this,errorMsg+errorCode).show();
+                Log.e("CheckActivity","错误信息："+errorMsg + "。错误码：" + errorCode);
+            }
+        });
+    }
+
+    private void putUserId(String id) {
+        SharedPreferences sharedPreferences = getSharedPreferences("user", MODE_PRIVATE);
+        SharedPreferences.Editor edit = sharedPreferences.edit();
+        edit.putString("id",id);
+        edit.commit();
+        handler.sendEmptyMessageDelayed(1001,500);
     }
 
     @OnClick({R.id.iv_close_check, R.id.tv_phone_check, R.id.iv_up_check, R.id.btn_time})

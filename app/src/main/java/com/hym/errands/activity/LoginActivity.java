@@ -3,13 +3,17 @@ package com.hym.errands.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import androidx.annotation.Nullable;
+
 import com.hym.errands.BaseActivity;
 import com.hym.errands.R;
 import com.hym.errands.bmob.BBManager;
+import com.hym.errands.manager.UserManager;
 import com.xuexiang.xui.widget.toast.XToast;
 
 import butterknife.BindView;
@@ -29,17 +33,19 @@ public class LoginActivity extends BaseActivity {
     ImageView mIvSendLogin;
 
     private String phone;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+        init();
     }
 
     @Override
     public void init() {
-
+        intent = new Intent();
     }
 
     @Override
@@ -65,9 +71,10 @@ public class LoginActivity extends BaseActivity {
                 finish();
                 break;
             case R.id.et_phone_login:
-                sendCode();
+//                finish();
                 break;
             case R.id.iv_send_login:
+                sendCode();
                 break;
         }
     }
@@ -82,13 +89,25 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void done(Integer integer, BmobException e) {
                 if (e == null) {
-                    Intent intent = new Intent(LoginActivity.this,CheckActivity.class);
+                    intent.setClass(LoginActivity.this,CheckActivity.class);
                     intent.putExtra("phone",phone);
                     startActivityForResult(intent,1000);
                 }else {
-                    XToast.warning(LoginActivity.this,"發送失敗：" +e.getErrorCode()).show();
+                    XToast.warning(LoginActivity.this,"發送失敗：" +e.getErrorCode()+ "-" + e.getMessage() + "\n").show();
+                    Log.e("LoginActivity","发送失败错误信息：" + e.getMessage());
                 }
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1000 && requestCode == RESULT_OK) {
+            intent.setClass(LoginActivity.this,HomeActivity.class);
+            startActivity(intent);
+            finish();
+            Log.e("LoginActivity", "userid"+UserManager.get().getUser().getObjectId());
+        }
     }
 }
