@@ -41,6 +41,22 @@ public class LoginActivity extends BaseActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         init();
+        /*// 动态获取权限，Android 6.0+ 新特性，
+        // 一些保护权限，除了要在AndroidManifest中声明权限，还要使用如下代码动态获取
+        if (Build.VERSION.SDK_INT >= 23){
+            int REQUEST_CODE_CONTACT = 101;
+
+            String[] permissions = {Manifest.permission.INTERNET};
+
+            // 验证是否许可权限
+            for (String str : permissions){
+                if (this.checkSelfPermission(str) != PackageManager.PERMISSION_GRANTED){
+                    // 申请权限
+                    this.requestPermissions(permissions, REQUEST_CODE_CONTACT);
+                    break;
+                }
+            }
+        }*/
     }
 
     @Override
@@ -64,14 +80,11 @@ public class LoginActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.iv_close_login, R.id.et_phone_login, R.id.iv_send_login})
+    @OnClick({R.id.iv_close_login, R.id.iv_send_login})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_close_login:
                 finish();
-                break;
-            case R.id.et_phone_login:
-//                finish();
                 break;
             case R.id.iv_send_login:
                 sendCode();
@@ -103,7 +116,7 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1000 && requestCode == RESULT_OK) {
+        if (requestCode == 1000 && resultCode == RESULT_OK) {
             intent.setClass(LoginActivity.this,HomeActivity.class);
             startActivity(intent);
             finish();

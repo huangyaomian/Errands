@@ -12,7 +12,7 @@ import cn.bmob.v3.Bmob;
 
 public class App extends Application {
 
-    private String APP_KEY = "http://doc.bmob.cn/data/android/#androidmanifestxml";
+    private String APP_KEY = "489ffacb02eec736c4889cafb736b726";
 
     @Override
     public void onCreate() {
