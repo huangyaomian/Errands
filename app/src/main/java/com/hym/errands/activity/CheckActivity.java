@@ -49,19 +49,25 @@ public class CheckActivity extends BaseActivity {
     private int count = 60;
     private MiniLoadingDialog mMiniLoadingDialog;
 
+    private boolean isSend = true;
+
     private Handler handler = new Handler(){
         @SuppressLint("HandlerLeak")
         @Override
         public void handleMessage(@NonNull Message msg) {
             super.handleMessage(msg);
-            if (msg.what == 1) {
-                mBtnTime.setEnabled(true);
-                mBtnTime.setText("重新發送");
-                mBtnTime.setBackgroundColor(ActivityCompat.getColor(CheckActivity.this,R.color.main_btn));
-            }else {
-                count--;
-                mBtnTime.setText(count + "s");
-                handler.sendEmptyMessageDelayed(count,1000);
+            if (isSend) {
+                if (msg.what == 1) {
+                    mBtnTime.setEnabled(true);
+                    mBtnTime.setText("重新發送");
+                    mBtnTime.setBackgroundColor(ActivityCompat.getColor(CheckActivity.this,R.color.main_btn));
+                    isSend = false;
+                    count = 60;
+                }else {
+                    count--;
+                    mBtnTime.setText(count + "s");
+                    handler.sendEmptyMessageDelayed(count,1000);
+                }
             }
             if (msg.what == 1001){
                 mMiniLoadingDialog.dismiss();
@@ -166,6 +172,7 @@ public class CheckActivity extends BaseActivity {
     }
 
     private void sendCode() {
+        isSend = true;
         BBManager.get().sendCode(phone, new QueryListener<Integer>() {
             @Override
             public void done(Integer integer, BmobException e) {

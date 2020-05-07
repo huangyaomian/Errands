@@ -38,7 +38,8 @@
             android:name="cn.bmob.v3.util.BmobContentProvider"
             android:authorities="com.hym.errands.BmobContentProvider" />
 
-    </application> <!-- 允许读取手机状态 用于创建BmobInstallation -->
+    </application>
+    <!-- 允许读取手机状态 用于创建BmobInstallation -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- 这个权限用于进行网络定位 -->
     <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- 这个权限用于访问GPS定位 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
