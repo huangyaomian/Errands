@@ -20,4 +20,8 @@
     <color name="main_yellow">#FEC62E</color>
 
     <color name="text_black">#000</color>
+
+    <color name="main_blue">#2196F3</color>
+
+    <color name="color_link">#ff7544</color>
 </resources>
