@@ -1,12 +1,15 @@
 package com.hym.errands.activity;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.core.widget.NestedScrollView;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -15,6 +18,7 @@ import com.hym.errands.R;
 import com.hym.errands.adpter.HomeBannerAdapter;
 import com.hym.errands.bmob.MyUser;
 import com.hym.errands.manager.UserManager;
+import com.hym.errands.utils.Permission;
 import com.xuexiang.xui.widget.banner.recycler.BannerLayout;
 import com.xuexiang.xui.widget.dialog.bottomsheet.BottomSheet;
 import com.xuexiang.xui.widget.imageview.RadiusImageView;
@@ -57,7 +61,9 @@ public class HomeActivity extends BaseActivity {
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
         init();
+        initView();
         initData();
+        initEvent();
 
     }
 
@@ -95,10 +101,11 @@ public class HomeActivity extends BaseActivity {
 
     @Override
     public void initEvent() {
-
+        Permission permission = new Permission();
+        permission.checkPermission(this);
     }
 
-    @OnClick({R.id.iv_photo_home, R.id.tv_username, R.id.tv_userid, R.id.tv_money, R.id.banner_home, R.id.tv_up_home, R.id.iv_close_home})
+    @OnClick({R.id.iv_photo_home, R.id.tv_username, R.id.tv_userid, R.id.tv_money, R.id.banner_home, R.id.tv_up_home, R.id.iv_close_home,R.id.lin_take_home})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_photo_home:
@@ -126,6 +133,16 @@ public class HomeActivity extends BaseActivity {
                 startActivity(intent);
                 break;
 
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 1000) {
+            if (grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Log.e("HomeActivity","獲取權限成功");
+            }
         }
     }
 }

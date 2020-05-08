@@ -36,6 +36,7 @@ public class TakeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take);
         ButterKnife.bind(this);
+        initEvent();
     }
 
     @Override
@@ -117,7 +118,9 @@ public class TakeActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         mapView.onDestroy();
-        mLocationClient.stop();
+        if (mLocationClient != null) {
+            mLocationClient.stop();
+        }
         mBaiduMap.setMyLocationEnabled(false);
         mBaiduMap = null;
     }
