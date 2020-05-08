@@ -1,16 +1,22 @@
 package com.hym.errands.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.core.widget.NestedScrollView;
+
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.hym.errands.BaseActivity;
 import com.hym.errands.R;
 import com.hym.errands.adpter.HomeBannerAdapter;
 import com.hym.errands.bmob.MyUser;
 import com.hym.errands.manager.UserManager;
 import com.xuexiang.xui.widget.banner.recycler.BannerLayout;
+import com.xuexiang.xui.widget.dialog.bottomsheet.BottomSheet;
 import com.xuexiang.xui.widget.imageview.RadiusImageView;
 
 import java.util.ArrayList;
@@ -34,28 +40,41 @@ public class HomeActivity extends BaseActivity {
     BannerLayout mBannerHome;
     @BindView(R.id.tv_up_home)
     TextView mTvUpHome;
-    @BindView(R.id.iv_close_home)
-    ImageView mIvCloseHome;
+    @BindView(R.id.nes_home)
+    View nesHome;
+
+    private LinearLayout linTake;
+    private ImageView mIvCloseHome;
 
     private HomeBannerAdapter adapter;
     private List<Integer> list;
+    private BottomSheetBehavior<View> behavior;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
-        initData();
         init();
+        initData();
+
     }
 
     @Override
     public void init() {
         list = new ArrayList<>();
+        intent = new Intent();
     }
 
     @Override
     public void initView() {
+        behavior = BottomSheetBehavior.from(nesHome);
+        behavior.setHideable(true);
+        behavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+
+        linTake = nesHome.findViewById(R.id.lin_take_home);
+        mIvCloseHome = nesHome.findViewById(R.id.iv_close_home);
 
     }
 
@@ -64,7 +83,7 @@ public class HomeActivity extends BaseActivity {
         MyUser user = UserManager.get().getUser();
         mTvUsername.setText(user.getName());
         mTvUserid.setText(user.getObjectId());
-        mTvMoney.setText("当前剩余:"+user.getMoney());
+        mTvMoney.setText("当前剩余:" + user.getMoney());
 
 
         list.add(R.mipmap.ima_51);
@@ -93,9 +112,20 @@ public class HomeActivity extends BaseActivity {
             case R.id.banner_home:
                 break;
             case R.id.tv_up_home:
+                if (behavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
+                    behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                }
                 break;
             case R.id.iv_close_home:
+                if (behavior.getState() != BottomSheetBehavior.STATE_HIDDEN) {
+                    behavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+                }
                 break;
+            case R.id.lin_take_home:
+                intent.setClass(HomeActivity.this,TakeActivity.class);
+                startActivity(intent);
+                break;
+
         }
     }
 }

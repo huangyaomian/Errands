@@ -21,6 +21,7 @@
         app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
+            android:id="@+id/lin_take_home"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -40,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="最快半小时达"
-                android:textColor="@color/text_main1"
+                android:textColor="@color/text_main"
                 android:textSize="12sp" />
 
         </LinearLayout>
@@ -50,7 +51,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:padding="5dp"
-            android:src="@drawable/ima_arrow" />
+            android:src="@drawable/ima_phone" />
+<!--        ima_arrow-->
     </LinearLayout>
 
 
@@ -89,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="万种商品  同城代购"
-                android:textColor="@color/text_main1"
+                android:textColor="@color/text_main"
                 android:textSize="12sp" />
 
         </LinearLayout>
@@ -99,7 +101,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:padding="5dp"
-            android:src="@drawable/ima_arrow" />
+            android:src="@drawable/ima_phone" />
+<!--        ima_arrow-->
     </LinearLayout>
 
 
@@ -109,7 +112,7 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:layout_marginTop="20dp"
-        android:src="@drawable/ic_close_24dp"
+        android:src="@drawable/ic_close_32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
