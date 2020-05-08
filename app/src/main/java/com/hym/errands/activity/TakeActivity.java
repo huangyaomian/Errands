@@ -61,7 +61,7 @@ public class TakeActivity extends BaseActivity {
         mLocationClient = new LocationClient(this);
         LocationClientOption option = new LocationClientOption();
         option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);
-        option.setCoorType("ba0911");
+        option.setCoorType("bd09ll");
         option.setScanSpan(0);
         option.setIsNeedAddress(true);
         option.setIsNeedLocationDescribe(true);

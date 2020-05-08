@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:padding="5dp"
-            android:src="@drawable/ima_phone" />
+            android:src="@drawable/ic_right_32dp" />
 <!--        ima_arrow-->
     </LinearLayout>
 
@@ -101,7 +101,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:padding="5dp"
-            android:src="@drawable/ima_phone" />
+            android:src="@drawable/ic_right_32dp" />
 <!--        ima_arrow-->
     </LinearLayout>
 
