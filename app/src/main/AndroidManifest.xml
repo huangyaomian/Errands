@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hym.errands">
-    <!-- 这个权限用于进行网络定位 -->
+
     <application
         android:name=".app.App"
         android:allowBackup="true"
@@ -22,10 +22,12 @@
         <activity android:name=".activity.HomeActivity" />
         <activity android:name=".activity.CheckActivity" />
         <activity android:name=".activity.LoginActivity" />
-        <activity android:name=".MainActivity" /> <!-- 百度定位服務 -->
+        <activity android:name=".MainActivity" />
+        <!-- 百度定位服務 -->
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="tH14G0NKO55DUX2vH10yUaxKvfpBaeQ5" /> <!-- 百度定位服務 -->
+            android:value="tH14G0NKO55DUX2vH10yUaxKvfpBaeQ5" />
+        <!-- 百度定位服務 -->
         <provider
             android:name="cn.bmob.v3.util.BmobContentProvider"
             android:authorities="com.hym.errands.BmobContentProvider" />
