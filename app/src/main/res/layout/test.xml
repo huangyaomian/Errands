@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:padding="5dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:drawableLeft="@drawable/ic_left_32dp"
+            android:text="Publish Note"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            ></TextView>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_right_32dp"
+            android:layout_alignParentRight="true"></ImageView>
+        <view
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#fff"></view>
+
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+        android:paddingLeft="16dp"
+        >
+
+        <ImageView
+            android:id="@+id/iv"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:src="@mipmap/ima_51"
+            android:scaleType="centerCrop">
+
+        </ImageView>
+
+        <LinearLayout
+            android:id="@+id/ll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@id/iv"
+            android:layout_marginLeft="8dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nahuel Espigares"
+                android:textSize="14sp"></TextView>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Public"
+                android:textSize="12sp"
+                android:textColor="#00c6e6"
+                android:drawableEnd="@drawable/ic_right_12dp"
+                android:background="@drawable/btn_selector"
+                android:gravity="center"
+                ></Button>
+
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/et"
+    android:layout_width="match_parent"
+    android:layout_height="38dp"
+    android:layout_below="@id/ll"
+    android:layout_margin="16dp"
+    android:hint="标题"
+    android:textColorHint="#cccccc"
+    android:background="@null"
+    android:gravity="left|center"
+    ></EditText>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="499dp"
+        android:layout_below="@id/et"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@null"
+        android:gravity="left|top"
+        android:hint="Write something"
+        android:padding="10dp"
+        android:textColorHint="#cccccc"></EditText>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="bottom"
+        android:background="@color/main_yellow">
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
